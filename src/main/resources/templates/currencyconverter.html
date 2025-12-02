@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <!--je peux importer des fichiers css disponibles dans le dossier : static (dossier accessible publiquement) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form method="POST" action="/converter" >
+    <input name="montant" type="number" placeholder="Montant"/>
+    <select name="from">
+        <option value="" >De</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="JPY">JPY</option>
+        <option value="GBP">GBP</option>
+    </select>
+    <select name="to">
+        <option value="" >Vers</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="JPY">JPY</option>
+        <option value="GBP">GBP</option>
+    </select>
+    <button>Envoyer</button>
+</form>
+
+<!--
+    syntaxe mustache (nécessite définir : spring.mustache.suffix=.html dans application.properties)
+    https://www.baeldung.com/spring-boot-mustache
+-->
+<!--
+{{#montantConverti}}{{/montantConverti}} : bloc if (montantConverti != null){...} en syntaxe mustache
+Ici : on veut afficher si jamais o les infos la valuer du montant converti
+-->
+{{#montantConverti}}
+    <h1>{{montant}}{{from}} = {{montantConverti}}{{to}} </h1>
+{{/montantConverti}}
+
+</body>
+</html>
